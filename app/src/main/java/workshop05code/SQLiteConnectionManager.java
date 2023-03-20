@@ -131,6 +131,7 @@ public class SQLiteConnectionManager {
 
         try (Connection conn = DriverManager.getConnection(databaseURL);
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, "%" + word + "%"); // Set the value of the parameter to the sanitized user input
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
